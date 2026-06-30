@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Calculator</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- Calculator card -->
+    <div class="calculator">
+
+      <!-- Top bar: title + theme toggle -->
+      <div class="top-bar">
+        <span class="title">Calculator</span>
+        <button id="theme-toggle" class="icon-btn" title="Toggle dark/light mode">🌙</button>
+      </div>
+
+      <!-- Display screen: shows previous expression (small) and current value (large) -->
+      <div class="display">
+        <div id="expression" class="expression"></div>
+        <div id="current" class="current">0</div>
+      </div>
+
+      <!-- Button grid -->
+      <div class="buttons">
+        <button class="btn function" data-action="clear">C</button>
+        <button class="btn function" data-action="backspace">⌫</button>
+        <button class="btn function" data-action="percent">%</button>
+        <button class="btn operator" data-action="operator" data-value="÷">÷</button>
+
+        <button class="btn number" data-value="7">7</button>
+        <button class="btn number" data-value="8">8</button>
+        <button class="btn number" data-value="9">9</button>
+        <button class="btn operator" data-action="operator" data-value="×">×</button>
+
+        <button class="btn number" data-value="4">4</button>
+        <button class="btn number" data-value="5">5</button>
+        <button class="btn number" data-value="6">6</button>
+        <button class="btn operator" data-action="operator" data-value="-">−</button>
+
+        <button class="btn number" data-value="1">1</button>
+        <button class="btn number" data-value="2">2</button>
+        <button class="btn number" data-value="3">3</button>
+        <button class="btn operator" data-action="operator" data-value="+">+</button>
+
+        <button class="btn number zero" data-value="0">0</button>
+        <button class="btn number" data-value=".">.</button>
+        <button class="btn equals" data-action="equals">=</button>
+      </div>
+    </div>
+
+    <!-- History panel -->
+    <div class="history-panel">
+      <div class="history-header">
+        <span>History</span>
+        <button id="clear-history" class="icon-btn" title="Clear history">🗑</button>
+      </div>
+      <ul id="history-list" class="history-list">
+        <li class="history-empty">No calculations yet</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

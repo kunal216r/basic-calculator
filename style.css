@@ -1,0 +1,306 @@
+/* ============ CSS Variables for theming ============ */
+:root {
+  --bg: #eef1f7;
+  --card-bg: #ffffff;
+  --text: #1f2430;
+  --muted: #7b8294;
+  --display-bg: #f4f6fb;
+  --btn-bg: #f0f2f8;
+  --btn-hover: #e3e7f2;
+  --btn-active: #d6dbeb;
+  --operator-bg: #ffd166ee;
+  --operator-bg: #ff9f43;
+  --operator-hover: #ff8c1f;
+  --equals-bg: #6c5ce7;
+  --equals-hover: #5a4bd6;
+  --function-bg: #e8eaf2;
+  --function-text: #5b6178;
+  --shadow: 0 20px 45px rgba(31, 36, 48, 0.12);
+  --radius: 18px;
+  --accent: #6c5ce7;
+}
+
+/* Dark theme overrides, toggled via class on <body> */
+body.dark {
+  --bg: #14151c;
+  --card-bg: #1d1f2a;
+  --text: #f1f2f6;
+  --muted: #9095a8;
+  --display-bg: #161821;
+  --btn-bg: #262936;
+  --btn-hover: #313546;
+  --btn-active: #3b3f54;
+  --operator-bg: #ff9f43;
+  --operator-hover: #ff8c1f;
+  --equals-bg: #6c5ce7;
+  --equals-hover: #5a4bd6;
+  --function-bg: #2a2d3a;
+  --function-text: #c2c5d6;
+  --shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+}
+
+/* ============ Reset & base ============ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+  padding: 20px;
+}
+
+/* App wrapper holds calculator + history side by side on larger screens */
+.app {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ============ Calculator card ============ */
+.calculator {
+  width: 340px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  transition: background 0.3s ease;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+}
+
+.icon-btn {
+  background: var(--btn-bg);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.icon-btn:hover {
+  background: var(--btn-hover);
+}
+
+.icon-btn:active {
+  transform: scale(0.92);
+}
+
+/* ============ Display ============ */
+.display {
+  background: var(--display-bg);
+  border-radius: 14px;
+  padding: 18px 16px;
+  text-align: right;
+  margin-bottom: 18px;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.expression {
+  font-size: 14px;
+  color: var(--muted);
+  min-height: 18px;
+  word-break: break-all;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.current {
+  font-size: 36px;
+  font-weight: 600;
+  word-break: break-all;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+/* Error state shown on display when invalid operation (e.g. divide by zero) */
+.current.error {
+  color: #ff5757;
+  font-size: 22px;
+}
+
+/* ============ Button grid ============ */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.btn {
+  border: none;
+  border-radius: 14px;
+  background: var(--btn-bg);
+  color: var(--text);
+  font-size: 19px;
+  font-weight: 500;
+  padding: 18px 0;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+}
+
+/* Press animation: scales button down slightly for tactile feedback */
+.btn:active,
+.btn.pressed {
+  transform: scale(0.93);
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
+}
+
+.btn.number {
+  background: var(--btn-bg);
+}
+
+.btn.zero {
+  grid-column: span 1;
+}
+
+.btn.function {
+  background: var(--function-bg);
+  color: var(--function-text);
+  font-size: 17px;
+}
+
+.btn.operator {
+  background: var(--operator-bg);
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn.operator:hover {
+  background: var(--operator-hover);
+}
+
+.btn.equals {
+  background: var(--equals-bg);
+  color: #fff;
+  grid-column: span 2;
+  font-weight: 600;
+}
+
+.btn.equals:hover {
+  background: var(--equals-hover);
+}
+
+/* ============ History panel ============ */
+.history-panel {
+  width: 260px;
+  max-height: 480px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s ease;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.history-list {
+  list-style: none;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-list li {
+  background: var(--display-bg);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.history-list li:hover {
+  background: var(--btn-hover);
+}
+
+.history-list .history-empty {
+  text-align: center;
+  color: var(--muted);
+  cursor: default;
+}
+
+.history-list .h-expr {
+  color: var(--muted);
+  font-size: 12px;
+  display: block;
+}
+
+.history-list .h-result {
+  font-size: 16px;
+  font-weight: 600;
+  display: block;
+  text-align: right;
+}
+
+/* ============ Responsive: mobile ============ */
+@media (max-width: 650px) {
+  .app {
+    flex-direction: column;
+    width: 100%;
+  }
+  .calculator,
+  .history-panel {
+    width: 100%;
+    max-width: 380px;
+  }
+  .history-panel {
+    max-height: 240px;
+  }
+}
+
+@media (max-width: 380px) {
+  .btn {
+    padding: 16px 0;
+    font-size: 17px;
+  }
+  .current {
+    font-size: 30px;
+  }
+}
